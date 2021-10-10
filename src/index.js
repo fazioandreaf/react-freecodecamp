@@ -2,23 +2,28 @@ import React from 'react';
 import reactDom from 'react-dom';
 
 
-function Hola(){
+function Booklist(){
   return (
-    <div>
-      <h1>
-        Ciao
-      </h1>
-      <Description />
-      <Description2 />
-    </div>
+    <section>
+      <Book title="first title" author="first author"/>
+      <Book title="second title" author="second author"/>
+      <Book title="third title" author="third author"/>
+      <Book title="forth title" author="forth author"/>
+      <Book title="fifht title" author="fifht author"/>
+      <Book title="six title" author="six author"/>
+    </section>
   );
 }
-const Description = () => {
+const Book = (props) => {
   return (
-    <p> lorem ipsum</p>
+    <article>
+      <Image />
+      <Author name={props.author} />
+      {props.title} 
+    </article>
 )};
-const Description2 = () => <p> lorem ipsum22222</p>;
-reactDom.render(
-  <Hola
-  />, document.getElementById('root')
-)
+let imgSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png";
+const Image = () => <img src={imgSrc}  width="100px" alt="Bello"/>;
+const Author = (props) => <h4>{props.name}</h4>;
+
+reactDom.render(<Booklist />, document.getElementById('root'));
