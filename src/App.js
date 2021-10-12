@@ -1,24 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
 function App() {
+  let title='random title';
+  const handleClick = () => {
+    title = 'hello people'
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <React.Fragment>
+
+    <div className="container">
+      <h1>{title}</h1>
+      <button type="Button" className='btn' onClick={handleClick}> Change title</button>
     </div>
+    </React.Fragment>
   );
 }
 
