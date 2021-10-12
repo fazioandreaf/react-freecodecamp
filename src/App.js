@@ -3,30 +3,30 @@ import { data } from './data/data-setStateArray'
 import './App.css';
 
 function App() {
-  const [people,setPeople] = React.useState(data)
+  const [person,setPerson] = useState({
+    name:'Peter',
+    age: 23,
+    message:'Lorem impsum,'
+  });
+  const changeMessage = () => {
+    // setPerson({...person,message:'new beatiful message'})
+    setMessage('beatiful message')
+  }
+  // const {name,age,message} = person;
+  const [age,setAge] = useState('Peter')
+  const [name,setName] = useState(23)
+  const [message,setMessage] = useState('Lorem impsum')
 
-  const removeItem = (id) => {
-    let newPeople = people.filter((person) => person.id !== id)
-    setPeople(newPeople)
-  }
-  return <>
-    <h2>useState Array example</h2>
-  {
-    people.map((person)=>{
-      const {id,name} = person;
-      return (
-        <div key={id} className='item'>
-          <h4>{name}</h4>
-          <button onClick={()=> removeItem(id)}>Remove this person</button>
-        </div>
-      )
-    })
-  }
-  <button className='btn' onClick={() => setPeople([])}>
-    clear items
-  </button>
+  return (
+  <>
+  <div className='container'>
+    <h3>{name}</h3>
+    <h3>{age}</h3>
+    <h3>{message}</h3>
+    <button className='btn' onClick={changeMessage}>Change message </button>
+  </div>
   </>
-
+  )
 }
 
 export default App;
