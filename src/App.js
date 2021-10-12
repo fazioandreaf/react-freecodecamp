@@ -1,25 +1,32 @@
 import React, {useState} from 'react';
+import { data } from './data/data-setStateArray'
 import './App.css';
 
 function App() {
-  // useState('random title');
-  // const value = useState(1)[0];
-  // const handler = useState(1)[1];
-  // const {value,handler}=useState(1);
-  const [text,setText] = useState('random title')
-  const handleClick = () => {
-    // i call the function inside useState
-    (text === 'random title' && text.length !== 0) ? setText('hello people') : setText('random title')
-  }
-  return (
-    <React.Fragment>
+  const [people,setPeople] = React.useState(data)
 
-    <div className="container">
-      <h1>{text}</h1>
-      <button type="Button" className='btn' onClick={handleClick}> Change title</button>
-    </div>
-    </React.Fragment>
-  );
+  const removeItem = (id) => {
+    let newPeople = people.filter((person) => person.id !== id)
+    setPeople(newPeople)
+  }
+  return <>
+    <h2>useState Array example</h2>
+  {
+    people.map((person)=>{
+      const {id,name} = person;
+      return (
+        <div key={id} className='item'>
+          <h4>{name}</h4>
+          <button onClick={()=> removeItem(id)}>Remove this person</button>
+        </div>
+      )
+    })
+  }
+  <button className='btn' onClick={() => setPeople([])}>
+    clear items
+  </button>
+  </>
+
 }
 
 export default App;
