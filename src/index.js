@@ -1,25 +1,58 @@
 import React from 'react';
 import reactDom from 'react-dom';
 
-
+const css =`
+  section {
+    display:flex;
+    flex-direction:row;
+    grid-template-columns: 2fr
+  }
+  article {
+    background: lightgray;
+    margin: 10px;
+    padding: 10px;
+    border-radius:5px;
+  }
+`
+const books = [
+  {
+    title:"first title",
+    author:'first author',
+  },
+  {
+    title:"second title",
+    author:'second author',
+  },
+  {
+    title:"third title",
+    author:'third author',
+  },
+  {
+    title:"fourth title",
+    author:'fourth author',
+  }
+]
 function Booklist(){
   return (
     <section>
-      <Book title="first title" author="first author"/>
-      <Book title="second title" author="second author"/>
-      <Book title="third title" author="third author"/>
-      <Book title="forth title" author="forth author"/>
-      <Book title="fifht title" author="fifht author"/>
-      <Book title="six title" author="six author"/>
+      <style>
+        {css}
+      </style>
+      {books.map((book)=>{
+        const {title,author}=book;
+        return (
+        <Book author={author} title={title}/>
+        );
+      })}
     </section>
   );
 }
-const Book = (props) => {
+const Book = ({author,title}) => {
   return (
     <article>
       <Image />
-      <Author name={props.author} />
-      {props.title} 
+      <Author name={author} />
+      {title}
     </article>
 )};
 let imgSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png";
