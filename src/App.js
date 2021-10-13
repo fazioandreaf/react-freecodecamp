@@ -1,24 +1,44 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-// every trigger rerender the component and relunch the UseEffect
+
+const url = 'https://api.github.com/users';
+
 function App() {
-  const [size, setSize] = useState(window.innerWidth);
-  const checkSize = () => {
-    setSize(window.innerWidth)
+  const [users, setUsers] = useState([]);
+
+  const getUsers = async() => {
+    const response = await fetch(url);
+    const users = await response.json();
+    // call sett user we generate a infinity loop
+    setUsers(users);
   }
-    useEffect(()=> {
-      window.addEventListener('resize',checkSize)
-      return () => {
-        window.removeEventListener('resize', checkSize)
-      }
-    },[]);
-  // }
+
+  useEffect(()=> {
+    getUsers();
+  },[]);
+
   return (
   <>
     <div className='container'>
-      <h1>UseEffect Cleanup</h1>
-      <h2>{size}</h2>
-      <button className='btn' onClick={() => { setSize ( window.innerWidth) }}>+</button>
+      <h1>Fetch Data</h1>
+      <h2>Github Users</h2>
+      <ul className='users'>
+        {
+          users.map((user)=> {
+            const {id,avatar_url,html_url,login} = user;
+            return (
+              <li key={id}>
+              <img src={avatar_url} alt={login}/>
+              <div>
+                <h4>{login}</h4>
+                <a href={html_url}>profile</a>
+              </div>
+            </li>
+            );
+          }
+          )
+        }
+      </ul>
     </div>
 
   </>
