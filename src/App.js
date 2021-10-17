@@ -1,40 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
 
-const url = 'https://api.github.com/users/QuincyLarso';
-
 function App() {
-  const [show, setShow] = useState(0);
-
-  useEffect(()=> {
-  },[]);
-  
-  return (
-    <div className='container'>
-      <h1>Show/Hide</h1>
-      <button className='btn' onClick={()=>setShow(!show)}>Show/Hide</button>
-      {show && <Item />}
-    </div>
-  )
-}
-
-const Item = () => {
-  const [size,setSize] = useState(window.innerWidth)
-
-  const checkSize = () => {
-    setSize(window.innerWidth)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('ciao');
   }
 
-  useEffect(()=>{
-    window.addEventListener('resize',checkSize)
-    return () => window.removeEventListener('resize', checkSize)
-
-  },[])
 
   return (
-    <div style={{marginTop: '2rem'}}>
-      <h1>window</h1>
-      <h1>size: {size}</h1>
+    <div className="container" style={{marginTop: '2rem'}}>
+      <h1>Forms</h1>
+      <article>
+        <form className='form' onSubmit={handleSubmit}>
+          <div className='form-control'>
+            <label htmlFor='firstName'>Name: </label>
+            <input type="text" id='firstName' name="firstName"></input>
+            <label htmlFor='email' style={{marginTop: '2rem'}}>Email: </label>
+            <input type="text" id='email' name="email"></input>
+          </div>
+          <button type='submit'>Add Person</button>
+        </form>
+      </article>
     </div>
   )
 }
