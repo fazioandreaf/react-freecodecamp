@@ -4,14 +4,9 @@ import './App.css';
 function App() {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
-  const [people, setPeople] = useState([]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    (firstName.length && email.length) ? setPeople((people)=> [...people,{firstName, email}] ) : console.log('empty values');
-    setFirstName('');
-    setEmail('');
-    console.log(people);
+    console.log(firstName, email);
   }
 
 
@@ -41,19 +36,6 @@ function App() {
           </div>
           <button type='submit'>Add Person</button>
         </form>
-        <div>
-          {
-            people.map((elem,i)=>{
-              const {id,firstName,email}= elem;
-              return (
-              <div className='item' key={id}>
-                <h4>{firstName}</h4>
-                <span>{email}</span>
-              </div>
-              )
-            })
-          }
-        </div>
       </article>
     </div>
   )
