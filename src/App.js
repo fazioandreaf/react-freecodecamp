@@ -1,39 +1,46 @@
-import React, {Fragment, useRef, useEffect} from 'react';
+import React, {Fragment, useRef, useEffect, useState} from 'react';
 import './App.css';
+import Modal from './Modal';
+import data from './data/data-setStateArray';
 
 function App() {
 
-	const refContainer= useRef(null);
-	const divContainer= useRef(null);
-	console.log(refContainer);
+const [people,setPeople] = useState(data);
+const [name,setName] = useState('');
+const [showModal,setShowModal] = useState(false);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(refContainer.current.value);
-		console.log(divContainer.current);
+const handleSubmit = (e) => {
+	e.preventDefault();
+	if(name) {
+		setShowModal(true);
+		setPeople([...people,{id:new Date().getTime().toString(),name}])
+		setName('');
+	} else {
+		setShowModal(true);
 	}
 
-	useEffect(() => {
-		console.log(refContainer.current);
-		refContainer.current.focus();
-
-	}, )
-  return (
-    <Fragment>
-		<div className='container'  onSubmit={handleSubmit}>
-			    <form>
-				<div>
-					<input type="text" ref={refContainer} />
-					<button type="submit">submit</button>
-				</div>
-			</form>
-			<div ref={divContainer}>
-			HELLO WORLD
+}
+	return (
+		<Fragment>
+			<div className='container'>
+				<h2>useReducer</h2>
 
 			</div>
-      </div>
-    </Fragment>
-  )
+			{showModal && <Modal/>}
+			<form onSubmit={handleSubmit}>
+				<div>
+					<input 
+					type='text'
+					value={name}
+					onChange={(e)=>setName(e.target.value)} />
+				</div>
+				<button type='submit'> add</button>
+			</form>
+			{people.map((person) => {
+				return <div key={person.id}><h4>{person.name}</h4></div>
+			})}
+		</Fragment>
+	)
 }
 
 export default App;
