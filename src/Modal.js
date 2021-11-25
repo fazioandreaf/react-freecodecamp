@@ -1,11 +1,11 @@
 import React, {useEffect, Fragment} from 'react';
 import './App.css';
 
-const Modal = () => {
+const Modal = ({modalContent}) => {
 
 	return (
 		<Fragment>
-				<div>I m modal</div>
+				<div className='modal'><p>{modalContent}</p></div>
 		</Fragment>
 	)
 }
