@@ -1,7 +1,14 @@
-import React, {useEffect, Fragment} from 'react';
+import React, { Fragment, useEffect} from 'react';
 import './App.css';
 
-const Modal = ({modalContent}) => {
+const Modal = ({modalContent, closeModal}) => {
+
+	useEffect(() => {
+		setTimeout(() => {
+			closeModal()
+		}, 3000);
+
+	})
 
 	return (
 		<Fragment>
